@@ -9,7 +9,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+myclient = pymongo.MongoClient("mongodb+srv://dogukanakgun22:dogukan123Q@restorant-app-db.2rc5mky.mongodb.net/?retryWrites=true&w=majority&appName=restorant-app-db")
 mydb = myclient["RestoranDB"]
 menuTable = mydb["MenuItems"]
 HotDrinksTable = mydb["HotDrinks"]
@@ -40,7 +40,7 @@ def login():
         else:
             return '404'
     else:
-        print("yarrağımın başını girersin")
+        print("Yok knk girme")
 
 """
 def get_sequence(seq_name):
@@ -140,74 +140,6 @@ def signin():
     #usersTable.insert_one(user)
     return {"resultCode":"Ok"}
 
-# ana sayfa doldurma
-@app.route('/vehicles')
-def vehicles():
-    vehicleData = {"res": list(vehiclesTable.find({}))}
-    return vehicleData
-
-@app.route('/brands')
-def brands():
-    brandData = {"res": list(otomobilBrandsTable.find({}))}
-    return brandData
-
-@app.route('/motorcyclebrands')
-def motorcycleBrands():
-    motorcyleBrandData = {"res": list(motorcycleBrandsTable.find({}))}
-    return motorcyleBrandData
-
-@app.route('/suvbrands')
-def suvBrands():
-    suvBrandData = {"res": list(suvBrandsTable.find({}))}
-    return suvBrandData
-
-@app.route('/cardetails', methods=['POST'])
-def carDetails():
-    data = request.get_json()
-    id = data['_id']
-    carDetailsData = {"res": list(carDetailTable.find({'_id': id}))}
-    return jsonify(carDetailsData)
-
-@app.route('/profile', methods=['POST'])
-def userDetail():
-    data = request.get_json()
-    id = data['_id']
-    user = {"res": list(usersTable.find({'_id': id}))}
-    return user
-
-
-
-@app.route('/vehiclelist')
-def vehicleList():
-    vehicleListData = {"res": list(vehicleListTable.find({}))}
-    return vehicleListData
-
-# TODO: update yapılacak backendi yaz
-
-@app.route('/favorites')
-def favoritesList():
-    favData = {"res": list(vehicleListTable.find({}))}
-    return favData
-
-
-# admin için vehicle ekleme
-
-
-@app.route('/vehicleadd', methods=['POST'])
-def vehicleAdd():
-    data = request.get_json()
-    id = data['_id']
-    title = data['title']
-    vehiclesTable.insert_one({'_id': id, 'title': title})
-    return {"resultCode": "Ok"}
-
-
-@app.route('/vehicledelete', methods=['POST'])
-def vehicleDelete():
-    data = request.get_json()
-    id = data['_id']
-    vehiclesTable.delete_one({'_id': id})
-    return {"resultCode": "Ok"}
 
 
 if __name__ == '__main__':
