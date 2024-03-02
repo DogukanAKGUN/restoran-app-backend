@@ -20,7 +20,7 @@ jobs:
           python -m pip install -r requirements.txt
       - name: Print debugging information
         run: |
-          echo "python version: ${python --version}"
-          echo "working director: ${PWD}"
+          echo "python version: $(python --version)"
+          echo "working director: $(PWD)"
           echo "Content of working directory: $(ls -l)"
           echo "contents of site-packages: $(ls -l venv/lib/python*/site-packages)"
